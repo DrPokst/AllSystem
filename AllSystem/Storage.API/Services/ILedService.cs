@@ -8,5 +8,6 @@ namespace Storage.API.Services
     public interface ILedService
     {
         Task<bool> TurnOnLed(int id);
+        Task<bool> TurnOff(int id);
     }
 }

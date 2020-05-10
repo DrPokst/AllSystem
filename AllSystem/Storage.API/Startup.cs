@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Storage.API.Data;
 using Storage.API.Helpers;
+using Storage.API.Services;
 
 namespace Storage.API
 {
@@ -39,6 +40,7 @@ namespace Storage.API
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<ISearchRepository, SearchRepository>();
             services.AddScoped<IReelRepository, ReelRepository>();
+            services.AddScoped<ILedService, LedService>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
 
                 options.TokenValidationParameters = new TokenValidationParameters
