@@ -25,7 +25,6 @@ namespace Storage.API
                 {
                     var context = services.GetRequiredService<DataContext>();
                     context.Database.Migrate();
-                    Seed.SeedUsers(context);
                 }
                 catch (Exception ex)
                 {

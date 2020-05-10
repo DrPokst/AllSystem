@@ -68,5 +68,6 @@ C:\Users\domantass\AllSystem\AllSystem\Storage.API\bin\Debug\netcoreapp3.1\Micro
 C:\Users\domantass\AllSystem\AllSystem\Storage.API\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\domantass\AllSystem\AllSystem\Storage.API\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
 C:\Users\domantass\AllSystem\AllSystem\Storage.API\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\domantass\AllSystem\AllSystem\Storage.API\bin\Debug\netcoreapp3.1\CloudinaryDotNet.dll
 C:\Users\domantass\AllSystem\AllSystem\Storage.API\obj\Debug\netcoreapp3.1\Storage.API.csproj.CoreCompileInputs.cache
 C:\Users\domantass\AllSystem\AllSystem\Storage.API\obj\Debug\netcoreapp3.1\Storage.API.MvcApplicationPartsAssemblyInfo.cache
