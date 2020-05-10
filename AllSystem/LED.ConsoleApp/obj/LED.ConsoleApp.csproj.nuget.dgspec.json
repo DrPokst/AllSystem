@@ -41,6 +41,16 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "Iot.Device.Bindings": {
+              "target": "Package",
+              "version": "[0.1.0-prerelease.19310.5, )"
+            },
+            "System.Device.Gpio": {
+              "target": "Package",
+              "version": "[0.1.0-prerelease.19310.5, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

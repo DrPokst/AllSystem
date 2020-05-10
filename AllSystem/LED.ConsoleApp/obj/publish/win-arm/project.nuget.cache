@@ -1,0 +1,57 @@
+{
+  "version": 2,
+  "dgSpecHash": "gj6UJoA4TSveS/6L3L/1XYZnHOvWNVlgA26StxC6OK0Rz/Svs1Q0sFW2TTzrSeWx3cNj7hOyroEk/xpyyk5E5w==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\domantass\\AllSystem\\AllSystem\\LED.ConsoleApp\\LED.ConsoleApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\domantass\\.nuget\\packages\\iot.device.bindings\\0.1.0-prerelease.19310.5\\iot.device.bindings.0.1.0-prerelease.19310.5.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\microsoft.netcore.platforms\\3.0.0-preview4.19212.13\\microsoft.netcore.platforms.3.0.0-preview4.19212.13.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\microsoft.win32.registry\\4.5.0\\microsoft.win32.registry.4.5.0.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\microsoft.win32.systemevents\\4.6.0-preview4.19212.13\\microsoft.win32.systemevents.4.6.0-preview4.19212.13.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\runtime.any.system.collections\\4.3.0\\runtime.any.system.collections.4.3.0.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\runtime.any.system.globalization\\4.3.0\\runtime.any.system.globalization.4.3.0.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\runtime.any.system.io\\4.3.0\\runtime.any.system.io.4.3.0.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\runtime.any.system.reflection\\4.3.0\\runtime.any.system.reflection.4.3.0.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\runtime.any.system.reflection.primitives\\4.3.0\\runtime.any.system.reflection.primitives.4.3.0.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\runtime.any.system.resources.resourcemanager\\4.3.0\\runtime.any.system.resources.resourcemanager.4.3.0.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\runtime.any.system.runtime\\4.3.0\\runtime.any.system.runtime.4.3.0.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\runtime.any.system.text.encoding\\4.3.0\\runtime.any.system.text.encoding.4.3.0.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\runtime.any.system.threading.tasks\\4.3.0\\runtime.any.system.threading.tasks.4.3.0.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\runtime.win.system.diagnostics.debug\\4.3.0\\runtime.win.system.diagnostics.debug.4.3.0.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\system.device.gpio\\0.1.0-prerelease.19310.5\\system.device.gpio.0.1.0-prerelease.19310.5.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\system.diagnostics.debug\\4.3.0\\system.diagnostics.debug.4.3.0.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\system.drawing.common\\4.6.0-preview4.19212.13\\system.drawing.common.4.6.0-preview4.19212.13.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\system.globalization\\4.3.0\\system.globalization.4.3.0.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\system.io\\4.3.0\\system.io.4.3.0.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\system.memory\\4.5.1\\system.memory.4.5.1.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\system.objectmodel\\4.3.0\\system.objectmodel.4.3.0.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\system.private.uri\\4.3.0\\system.private.uri.4.3.0.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\system.reflection\\4.3.0\\system.reflection.4.3.0.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\system.reflection.primitives\\4.3.0\\system.reflection.primitives.4.3.0.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\system.resources.resourcemanager\\4.3.0\\system.resources.resourcemanager.4.3.0.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\system.runtime.interopservices.windowsruntime\\4.3.0\\system.runtime.interopservices.windowsruntime.4.3.0.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\system.runtime.windowsruntime\\4.3.0\\system.runtime.windowsruntime.4.3.0.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\system.security.accesscontrol\\4.5.0\\system.security.accesscontrol.4.5.0.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\system.security.principal.windows\\4.5.0\\system.security.principal.windows.4.5.0.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\system.text.encoding\\4.3.0\\system.text.encoding.4.3.0.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\system.threading\\4.3.0\\system.threading.4.3.0.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",
+    "C:\\Users\\domantass\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.1\\system.threading.tasks.extensions.4.5.1.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Iot.Device.Bindings 0.1.0-prerelease.19310.5 depends on System.Drawing.Common (>= 4.6.0-preview4.19164.7) but System.Drawing.Common 4.6.0-preview4.19164.7 was not found. An approximate best match of System.Drawing.Common 4.6.0-preview4.19212.13 was resolved.",
+      "libraryId": "System.Drawing.Common",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1",
+        ".NETCoreApp,Version=v3.1/win-arm"
+      ]
+    }
+  ]
+}

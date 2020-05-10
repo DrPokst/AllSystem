@@ -1,0 +1,17 @@
+C:\Users\domantass\AllSystem\AllSystem\LED.ConsoleApp\bin\Release\netcoreapp3.1\win-arm\LED.ConsoleApp.exe
+C:\Users\domantass\AllSystem\AllSystem\LED.ConsoleApp\bin\Release\netcoreapp3.1\win-arm\LED.ConsoleApp.deps.json
+C:\Users\domantass\AllSystem\AllSystem\LED.ConsoleApp\bin\Release\netcoreapp3.1\win-arm\LED.ConsoleApp.runtimeconfig.json
+C:\Users\domantass\AllSystem\AllSystem\LED.ConsoleApp\bin\Release\netcoreapp3.1\win-arm\LED.ConsoleApp.runtimeconfig.dev.json
+C:\Users\domantass\AllSystem\AllSystem\LED.ConsoleApp\bin\Release\netcoreapp3.1\win-arm\LED.ConsoleApp.dll
+C:\Users\domantass\AllSystem\AllSystem\LED.ConsoleApp\bin\Release\netcoreapp3.1\win-arm\LED.ConsoleApp.pdb
+C:\Users\domantass\AllSystem\AllSystem\LED.ConsoleApp\bin\Release\netcoreapp3.1\win-arm\Iot.Device.Bindings.dll
+C:\Users\domantass\AllSystem\AllSystem\LED.ConsoleApp\bin\Release\netcoreapp3.1\win-arm\Microsoft.Win32.SystemEvents.dll
+C:\Users\domantass\AllSystem\AllSystem\LED.ConsoleApp\bin\Release\netcoreapp3.1\win-arm\System.Device.Gpio.dll
+C:\Users\domantass\AllSystem\AllSystem\LED.ConsoleApp\bin\Release\netcoreapp3.1\win-arm\System.Drawing.Common.dll
+C:\Users\domantass\AllSystem\AllSystem\LED.ConsoleApp\obj\Release\netcoreapp3.1\win-arm\LED.ConsoleApp.csproj.CoreCompileInputs.cache
+C:\Users\domantass\AllSystem\AllSystem\LED.ConsoleApp\obj\Release\netcoreapp3.1\win-arm\LED.ConsoleApp.AssemblyInfoInputs.cache
+C:\Users\domantass\AllSystem\AllSystem\LED.ConsoleApp\obj\Release\netcoreapp3.1\win-arm\LED.ConsoleApp.AssemblyInfo.cs
+C:\Users\domantass\AllSystem\AllSystem\LED.ConsoleApp\obj\Release\netcoreapp3.1\win-arm\LED.ConsoleApp.csproj.CopyComplete
+C:\Users\domantass\AllSystem\AllSystem\LED.ConsoleApp\obj\Release\netcoreapp3.1\win-arm\LED.ConsoleApp.dll
+C:\Users\domantass\AllSystem\AllSystem\LED.ConsoleApp\obj\Release\netcoreapp3.1\win-arm\LED.ConsoleApp.pdb
+C:\Users\domantass\AllSystem\AllSystem\LED.ConsoleApp\obj\Release\netcoreapp3.1\win-arm\LED.ConsoleApp.genruntimeconfig.cache
