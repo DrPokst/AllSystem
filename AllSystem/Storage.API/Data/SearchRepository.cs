@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Storage.API.Models;
 using Microsoft.EntityFrameworkCore;
+using Storage.API.Helpers;
+using System.ComponentModel;
+using System.Linq;
 
 namespace Storage.API.Data
 {
@@ -30,11 +33,21 @@ namespace Storage.API.Data
             return componentass;
         }
 
-        public async Task<IEnumerable<Componentas>> GetComponents()
+        public async Task<PageList<Componentas>> GetComponents(ComponentParams componentParams)
         {
-            var componentass = await _context.Componentass.Include(p => p.Photos).ToListAsync();
-           
-            return componentass;
+            var componentass = _context.Componentass.Include(p => p.Photos).AsQueryable();
+
+            if (componentParams.Size != null)
+            {
+                componentass = componentass.Where(u => u.Size == componentParams.Size);
+            }
+
+            if (componentParams.Type != null)
+            {
+                componentass = componentass.Where(u => u.Type == componentParams.Type);
+            }
+
+            return await PageList<Componentas>.CreateAsync(componentass, componentParams.PageNumber, componentParams.PageSize);
         }
 
         public async Task<Componentas> RegisterComponents(Componentas componentas)
