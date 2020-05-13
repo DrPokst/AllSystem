@@ -19,6 +19,7 @@ namespace Storage.API.Helpers
 		}
 
 		public string Type { get; set; }
-		public string Size { get; set; } 
+		public string Size { get; set; }
+		public string Mnf { get; set; }
 	}
 }

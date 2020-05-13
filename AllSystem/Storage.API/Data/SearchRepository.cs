@@ -47,6 +47,11 @@ namespace Storage.API.Data
                 componentass = componentass.Where(u => u.Type == componentParams.Type);
             }
 
+            if (componentParams.Mnf != null)
+            {
+                componentass = componentass.Where(u => u.Mnf == componentParams.Mnf);
+            }
+
             return await PageList<Componentas>.CreateAsync(componentass, componentParams.PageNumber, componentParams.PageSize);
         }
 
