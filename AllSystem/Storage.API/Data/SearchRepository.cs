@@ -37,6 +37,8 @@ namespace Storage.API.Data
         {
             var componentass = _context.Componentass.Include(p => p.Photos).AsQueryable();
 
+            
+
             if (componentParams.Size != null)
             {
                 componentass = componentass.Where(u => u.Size == componentParams.Size);
@@ -50,6 +52,27 @@ namespace Storage.API.Data
             if (componentParams.Mnf != null)
             {
                 componentass = componentass.Where(u => u.Mnf == componentParams.Mnf);
+            }
+            if (componentParams.Nominal != null)
+            {
+                componentass = componentass.Where(u => u.Nominal == componentParams.Nominal);
+            }
+            if (componentParams.BuhNr != null)
+            {
+                componentass = componentass.Where(u => u.BuhNr == componentParams.BuhNr);
+            }
+
+            if (!string.IsNullOrEmpty(componentParams.OrderBy))
+            {
+                switch (componentParams.OrderBy)
+                {
+                    case "created":
+                        componentass = componentass.OrderByDescending(u => u.Created);
+                        break;
+                    default:
+                        componentass = componentass.OrderBy(u => u.Id);
+                        break;
+                }
             }
 
             return await PageList<Componentas>.CreateAsync(componentass, componentParams.PageNumber, componentParams.PageSize);

@@ -8,6 +8,7 @@ using Storage.API.DTOs;
 using Storage.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Storage.API.Helpers;
 
 namespace Storage.API.Controllers
 {   
@@ -26,10 +27,12 @@ namespace Storage.API.Controllers
         }
         
         [HttpGet]
-        public async Task<IActionResult> GetReels()
+        public async Task<IActionResult> GetReels([FromQuery]ReelParams reelParams)
         {
-            var reels = await _repo.GetReels();
+            var reels = await _repo.GetReels(reelParams);
             var reelsToReturn= _mapper.Map<IEnumerable<ReelsForListDto>>(reels);
+
+            Response.AddPagination(reels.CurrentPage, reels.PageSize, reels.TotalCount, reels.TotalPages);
 
             return Ok(reelsToReturn);
         }
