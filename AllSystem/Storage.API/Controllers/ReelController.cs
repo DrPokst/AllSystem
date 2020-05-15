@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Storage.API.Controllers
 {   
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ReelController : ControllerBase

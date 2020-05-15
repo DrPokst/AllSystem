@@ -28,7 +28,7 @@ namespace Storage.API.Services
             // Display basic colors for 5 sec
             BitmapImage img = device.Image;
             img.Clear();
-            img.SetPixel(id, 0, Color.Blue);
+            img.SetPixel(id-1, 0, Color.Blue);
             device.Update();
             System.Threading.Thread.Sleep(5000);
             return true;
