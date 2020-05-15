@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Storage.API.Models;
 using Microsoft.EntityFrameworkCore;
+using Storage.API.Helpers;
 
 namespace Storage.API.Data
 {
@@ -28,8 +29,10 @@ namespace Storage.API.Data
             Reel[] y = new Reel[0];
             Reel[] d = new Reel[0];
 
-            var componentass = await _context.Componentass.Include(p => p.Photos).FirstOrDefaultAsync(u => u.Id == id);
-            for (int i = 1; i < 2000; i++)
+            var componentass = await _context.Componentass.FirstOrDefaultAsync(u => u.Id == id);
+
+
+            for (int i = 1; i < 500; i++)
             {
                 var reel = await _context.Reels.Include(p => p.Photos2).FirstOrDefaultAsync(u => u.Id == i);
 
@@ -48,6 +51,8 @@ namespace Storage.API.Data
                     d = d.Concat(new Reel[] { y[k] }).ToArray();
                 }
             }
+            
+
 
             return d;
         }
@@ -66,11 +71,33 @@ namespace Storage.API.Data
             return reel;
         }
 
-        public async Task<IEnumerable<Reel>> GetReels()
+        public async Task<PageList<Reel>> GetReels(ReelParams reelParams)
         {
-            var reels = await _context.Reels.Include(p => p.Photos2).ToListAsync();
-           
-            return reels;
+            var reels = _context.Reels.Include(p => p.Photos2).AsQueryable();
+
+            if (reelParams.CMnf != null)
+            {
+                reels = reels.Where(u => u.CMnf == reelParams.CMnf);
+            }
+
+            if (!string.IsNullOrEmpty(reelParams.OrderBy))
+            {
+                switch (reelParams.OrderBy)
+                {
+                    case "CMnf":
+                        reels = reels.OrderBy(u => u.CMnf);
+                        break;
+                    case "qty":
+                        reels = reels.OrderBy(u => u.QTY);
+                        break;
+                    default:
+                        reels = reels.OrderBy(u => u.Id);
+                        break;
+                }
+            }
+
+            return await PageList<Reel>.CreateAsync(reels, reelParams.PageNumber, reelParams.PageSize);
+            
         }
 
 

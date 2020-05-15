@@ -8,6 +8,8 @@ using Storage.API.DTOs;
 using Storage.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Storage.API.Helpers;
+using System.ComponentModel;
 
 namespace Storage.API.Controllers
 {
@@ -25,10 +27,12 @@ namespace Storage.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetComponents()
+        public async Task<IActionResult> GetComponents([FromQuery]ComponentParams componentParams)
         {
-            var components = await _repo.GetComponents();
+            var components = await _repo.GetComponents(componentParams);
             var componentsToReturn= _mapper.Map<IEnumerable<ComponetsForListDto>>(components);
+
+            Response.AddPagination(components.CurrentPage, components.PageSize, components.TotalCount, components.TotalPages);
 
             return Ok(componentsToReturn);
         }

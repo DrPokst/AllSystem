@@ -10,6 +10,7 @@ using Storage.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using System.ComponentModel;
 
 namespace Storage.API.Controllers
 {
@@ -87,6 +88,43 @@ namespace Storage.API.Controllers
             }
                 
             return BadRequest("Could not add the photo");
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePhoto(int componentId, int id)
+        {
+            var componentFromRepo = await _repo.GetComponents(componentId);
+
+            var photoFromRepo = await _repo.GetPhoto(id);
+
+            if (photoFromRepo.IsMain)
+            {
+                return BadRequest("You cannot delete main photo");
+            }
+
+            if (photoFromRepo.PublicId != null)
+            {
+                var deleteParams = new DeletionParams(photoFromRepo.PublicId);
+
+                var result = _cloudinary.Destroy(deleteParams);
+
+                if (result.Result == "ok")
+                {
+                    _repo.Delete(photoFromRepo);
+                }
+            }
+
+            if (photoFromRepo.PublicId == null)
+            {
+                _repo.Delete(photoFromRepo);
+            }
+
+            if (await _repo.SaveAll())
+            {
+                return Ok();
+            }
+
+            return BadRequest("Failed to delete the photo");
+
         }
 
     }

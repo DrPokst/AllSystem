@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Storage.API.Models;
 using Microsoft.EntityFrameworkCore;
+using Storage.API.Helpers;
+using System.ComponentModel;
+using System.Linq;
 
 namespace Storage.API.Data
 {
@@ -30,11 +33,49 @@ namespace Storage.API.Data
             return componentass;
         }
 
-        public async Task<IEnumerable<Componentas>> GetComponents()
+        public async Task<PageList<Componentas>> GetComponents(ComponentParams componentParams)
         {
-            var componentass = await _context.Componentass.Include(p => p.Photos).ToListAsync();
-           
-            return componentass;
+            var componentass = _context.Componentass.Include(p => p.Photos).AsQueryable();
+
+            
+
+            if (componentParams.Size != null)
+            {
+                componentass = componentass.Where(u => u.Size == componentParams.Size);
+            }
+
+            if (componentParams.Type != null)
+            {
+                componentass = componentass.Where(u => u.Type == componentParams.Type);
+            }
+
+            if (componentParams.Mnf != null)
+            {
+                componentass = componentass.Where(u => u.Mnf == componentParams.Mnf);
+            }
+            if (componentParams.Nominal != null)
+            {
+                componentass = componentass.Where(u => u.Nominal == componentParams.Nominal);
+            }
+            if (componentParams.BuhNr != null)
+            {
+                componentass = componentass.Where(u => u.BuhNr == componentParams.BuhNr);
+            }
+
+            if (!string.IsNullOrEmpty(componentParams.OrderBy))
+            {
+                switch (componentParams.OrderBy)
+                {
+                    case "created":
+                        componentass = componentass.OrderByDescending(u => u.Created);
+                        break;
+                    default:
+                        componentass = componentass.OrderBy(u => u.Id);
+                        break;
+                }
+            }
+
+            return await PageList<Componentas>.CreateAsync(componentass, componentParams.PageNumber, componentParams.PageSize);
         }
 
         public async Task<Componentas> RegisterComponents(Componentas componentas)
