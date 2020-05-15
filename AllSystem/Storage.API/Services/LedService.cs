@@ -23,7 +23,7 @@ namespace Storage.API.Services
             };
 
             var spi = new Windows10SpiDevice(settings);
-            var device = new Ws2812b(spi, 10);
+            var device = new Ws2812b(spi, 75);
 
             // Display basic colors for 5 sec
             BitmapImage img = device.Image;
@@ -44,7 +44,7 @@ namespace Storage.API.Services
             };
 
             var spi = new Windows10SpiDevice(settings);
-            var device = new Ws2812b(spi, 10);
+            var device = new Ws2812b(spi, 75);
 
             // Display basic colors for 5 sec
             BitmapImage image = device.Image;
