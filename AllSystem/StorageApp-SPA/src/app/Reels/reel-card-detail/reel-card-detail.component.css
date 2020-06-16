@@ -1,0 +1,10 @@
+.profile-img{
+    text-align: center;
+}
+.profile-img img{
+    width: inherit;
+    height: 300px;
+}
+.qr{
+    height: 120px;
+}

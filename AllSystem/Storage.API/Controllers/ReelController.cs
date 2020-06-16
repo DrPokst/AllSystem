@@ -58,6 +58,21 @@ namespace Storage.API.Controllers
 
             return StatusCode(201);
         }
-        
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateReel(int id, ReelForUpdateDto reelForUpdateDto)
+        {
+            // if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            //     return Unauthorized();
+
+            var reelFromRepo = await _repo.GetReel(id);
+
+            _mapper.Map(reelForUpdateDto, reelFromRepo);
+
+            if (await _repo.SaveAll())
+                return NoContent();
+
+            throw new Exception($"Updating user {id} failed on save");
+        }
+
     }
 }

@@ -51,11 +51,17 @@ namespace Storage.API.Data
 
             if (componentParams.Mnf != null)
             {
-                componentass = componentass.Where(u => u.Mnf == componentParams.Mnf);
+                componentass = from u in componentass
+                               where u.Mnf.StartsWith(componentParams.Mnf)
+                               select u;
+   
+
             }
             if (componentParams.Nominal != null)
             {
-                componentass = componentass.Where(u => u.Nominal == componentParams.Nominal);
+                componentass = from u in componentass
+                               where u.Nominal.StartsWith(componentParams.Nominal)
+                               select u;
             }
             if (componentParams.BuhNr != null)
             {
@@ -87,7 +93,16 @@ namespace Storage.API.Data
             return componentas;
 
         }
-         public async Task<Photo> GetPhoto(int id)
+        public async Task<Photo> RegisterPhoto(Photo photo)
+        {
+
+            await _context.Photos.AddAsync(photo);
+            await _context.SaveChangesAsync();
+
+            return photo;
+
+        }
+        public async Task<Photo> GetPhoto(int id)
         {
             var photo = await _context.Photos.FirstOrDefaultAsync(p => p.Id == id);
             return photo;
@@ -106,7 +121,10 @@ namespace Storage.API.Data
             return false;
         }
 
-       
-        
+        public async Task<Photo> GetPhotoCID(int Cid)
+        {
+            var photo = await _context.Photos.FirstOrDefaultAsync(p => p.ComponentasId == Cid);
+            return photo;
+        }
     }
 }

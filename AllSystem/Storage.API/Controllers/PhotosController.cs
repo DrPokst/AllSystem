@@ -20,16 +20,17 @@ namespace Storage.API.Controllers
     public class PhotosController : ControllerBase
     { 
         private readonly ISearchRepository _repo;
+        private readonly IReelRepository _repo2;
         private readonly IMapper _mapper;
         private readonly IOptions<CloudinarySettings> _cloudinaryConfig;
         private Cloudinary _cloudinary;
 
-        public PhotosController(ISearchRepository repo, IMapper mapper, IOptions<CloudinarySettings> cloudinaryConfig)
+        public PhotosController(ISearchRepository repo, IReelRepository repo2, IMapper mapper, IOptions<CloudinarySettings> cloudinaryConfig)
         {
             _cloudinaryConfig = cloudinaryConfig;
             _mapper = mapper;
             _repo = repo;
-
+            _repo2 = repo2;
             Account acc = new Account(
                 _cloudinaryConfig.Value.CloudName = "drpokst1",           // reikia pakeisti del saugumo negali visi matyti.... 
                 _cloudinaryConfig.Value.ApiKey = "753448745425474",         // reikia pakeisti del saugumo negali visi matyti.... 
@@ -89,6 +90,8 @@ namespace Storage.API.Controllers
                 
             return BadRequest("Could not add the photo");
         }
+     
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePhoto(int componentId, int id)
         {

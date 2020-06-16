@@ -7,7 +7,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAnnNolpGnp0aJ3yMNbcHWsgAAAAACAAAAAAADZgAAwAAAABAAAACZdjvRDIecyVDob0cjeXieAAAAAASAAACgAAAAEAAAAIrdU3rUeXbL++l48oquHp0QAAAA0wZO4jRKYAiMSq711hysThQAAADdkiHuZaSqSvzG1A26FyWX/Q1sBg==</EncryptedPassword>
-    <_PublishTargetUrl>ftp://192.168.8.112/StorageAPI</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\Users\domantass\Desktop\publish</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="api-ms-win-core-console-l1-1-0.dll">

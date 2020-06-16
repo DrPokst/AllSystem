@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
 using Storage.API.Models;
 
 namespace Storage.API.DTOs
@@ -16,5 +18,8 @@ namespace Storage.API.DTOs
         public string Furl { get; set; }
         public string Durl { get; set; }
         public string Murl { get; set; }
+        public string PublicId { get; set; }
+        public IFormFile file { get; set; }
+
     }
 }

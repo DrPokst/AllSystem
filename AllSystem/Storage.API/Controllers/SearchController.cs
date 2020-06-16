@@ -10,6 +10,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Storage.API.Helpers;
 using System.ComponentModel;
+using CloudinaryDotNet.Actions;
+using CloudinaryDotNet;
+using Microsoft.Extensions.Options;
+using System.Linq;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
 
 namespace Storage.API.Controllers
 {
@@ -19,18 +25,29 @@ namespace Storage.API.Controllers
     {
         private readonly ISearchRepository _repo;
         private readonly IMapper _mapper;
-        public SearchController(ISearchRepository repo, IMapper mapper)
+        private readonly IOptions<CloudinarySettings> _cloudinaryConfig;
+        private Cloudinary _cloudinary;
+
+        public SearchController(ISearchRepository repo, IMapper mapper, IOptions<CloudinarySettings> cloudinaryConfig)
         {
             _mapper = mapper;
+            _cloudinaryConfig = cloudinaryConfig;
             _repo = repo;
+            Account acc = new Account(
+                _cloudinaryConfig.Value.CloudName = "drpokst1",           // reikia pakeisti del saugumo negali visi matyti.... 
+                _cloudinaryConfig.Value.ApiKey = "753448745425474",         // reikia pakeisti del saugumo negali visi matyti.... 
+                _cloudinaryConfig.Value.ApiSecret = "x8KHxQjnrGXKcu9WOfxU2ddkGqE"     // reikia pakeisti del saugumo negali visi matyti.... 
 
+            );
+
+            _cloudinary = new Cloudinary(acc);
         }
 
         [HttpGet]
         public async Task<IActionResult> GetComponents([FromQuery]ComponentParams componentParams)
         {
             var components = await _repo.GetComponents(componentParams);
-            var componentsToReturn= _mapper.Map<IEnumerable<ComponetsForListDto>>(components);
+            var componentsToReturn = _mapper.Map<IEnumerable<ComponetsForListDto>>(components);
 
             Response.AddPagination(components.CurrentPage, components.PageSize, components.TotalCount, components.TotalPages);
 
@@ -39,17 +56,17 @@ namespace Storage.API.Controllers
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetComponents(int id)
-        {   
+        {
             var components = await _repo.GetComponents(id);
-            var componentsToReturn= _mapper.Map<ComponetsForListDto>(components);
+            var componentsToReturn = _mapper.Map<ComponetsForListDto>(components);
 
             return Ok(componentsToReturn);
         }
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateComponent(int id, ComponentForUpdateDto componentForUpdateDto)
         {
-           // if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-           //     return Unauthorized();
+            // if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            //     return Unauthorized();
 
             var componentsFromRepo = await _repo.GetComponents(id);
 
@@ -57,33 +74,107 @@ namespace Storage.API.Controllers
 
             if (await _repo.SaveAll())
                 return NoContent();
-            
+
             throw new Exception($"Updating user {id} failed on save");
         }
-         [HttpPost("registercomponent")]
-        public async Task<IActionResult> RegisterComponent(ComponetsForRegisterDto ComponetsForRegisterDto)
+
+        [HttpPost("registercomponent")]
+        public async Task<IActionResult> RegisterComponent([FromForm]ComponetsForRegisterDto ComponetsForRegisterDto)
         {
+            var file = ComponetsForRegisterDto.file;
+            
+            var uploadResult = new ImageUploadResult();
+
+            if (file.Length > 0)
+            {
+                using (var stream = file.OpenReadStream())
+                {
+                    var uploadParams = new ImageUploadParams()
+                    {
+                        File = new FileDescription(file.Name, stream),
+                        Transformation = new Transformation().Width(500).Height(500).Crop("fill").Gravity("face")
+                    };
+
+                    uploadResult = _cloudinary.Upload(uploadParams);
+                }
+            }
+
+           ComponetsForRegisterDto.PublicId = uploadResult.PublicId;
+            
 
             var ComponentasToCreate = new Componentas
-            {   
-                Mnf = ComponetsForRegisterDto.Mnf,
-                Manufacturer = ComponetsForRegisterDto.Manufacturer,
-                Detdescription = ComponetsForRegisterDto.Detdescription,
-                BuhNr = ComponetsForRegisterDto.BuhNr,
-                Size = ComponetsForRegisterDto.Size,
-                Type = ComponetsForRegisterDto.Type,
-                Nominal = ComponetsForRegisterDto.Nominal,
-                Furl = ComponetsForRegisterDto.Furl,
-                Durl = ComponetsForRegisterDto.Durl,
-                Murl = ComponetsForRegisterDto.Murl
-            };
+                {
+                    Mnf = ComponetsForRegisterDto.Mnf,
+                    Manufacturer = ComponetsForRegisterDto.Manufacturer,
+                    Detdescription = ComponetsForRegisterDto.Detdescription,
+                    BuhNr = ComponetsForRegisterDto.BuhNr,
+                    Size = ComponetsForRegisterDto.Size,
+                    Type = ComponetsForRegisterDto.Type,
+                    Nominal = ComponetsForRegisterDto.Nominal,
+                    Furl = ComponetsForRegisterDto.Furl,
+                    Durl = ComponetsForRegisterDto.Durl,
+                    Murl = ComponetsForRegisterDto.Murl,
+                };
 
             var createComponent = await _repo.RegisterComponents(ComponentasToCreate);
+
+
+            var PhotoToCreate = new Photo
+            {
+                PublicId = ComponetsForRegisterDto.PublicId,
+                IsMain = true,
+                Url = uploadResult.Uri.ToString(),
+                ComponentasId = ComponentasToCreate.Id
+
+            };
             
+
+           var createPhoto = await _repo.RegisterPhoto(PhotoToCreate);
+
+
+
             return StatusCode(201);
         }
-        
-        
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteComponent(int id)
+        {
+            var componentFromRepo = await _repo.GetComponents(id);
+
+            var photoFromRepo = await _repo.GetPhotoCID(componentFromRepo.Id);
+
+            if (photoFromRepo.PublicId != null)
+            {
+                var deleteParams = new DeletionParams(photoFromRepo.PublicId);
+
+                var result = _cloudinary.Destroy(deleteParams);
+
+                if (result.Result == "ok")
+                {
+                    _repo.Delete(photoFromRepo);
+                }
+            }
+
+            if (photoFromRepo.PublicId == null)
+            {
+                _repo.Delete(photoFromRepo);
+                _repo.Delete(componentFromRepo);
+            }
+
+            if (componentFromRepo != null)
+            {
+                _repo.Delete(componentFromRepo);
+            }
+
+            if (await _repo.SaveAll())
+            {
+                return Ok();
+            }
+
+
+            return BadRequest("Failed to delete");
+
+        }
 
 
     }

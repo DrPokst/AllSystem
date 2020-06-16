@@ -13,8 +13,10 @@ namespace Storage.API.Data
          Task<PageList<Componentas>> GetComponents(ComponentParams componentParams);
          Task<Componentas> GetComponents(int id);
          Task<Componentas> RegisterComponents(Componentas componentas);
-         Task<Photo> GetPhoto(int id);
-         Task<bool> MnFExists(string Mnf);
+        Task<Photo> RegisterPhoto(Photo photo);
+        Task<Photo> GetPhoto(int id);
+        Task<Photo> GetPhotoCID(int Cid);
+        Task<bool> MnFExists(string Mnf);
        
     }
 }
