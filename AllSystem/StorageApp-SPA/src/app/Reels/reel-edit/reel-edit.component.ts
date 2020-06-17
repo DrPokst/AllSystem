@@ -33,7 +33,16 @@ export class ReelEditComponent implements OnInit {
       this.alertify.error(error);
     });
   }
+  deleteR(){
 
+    this.alertify.confirm('Are you sure want to delete this reel?', ()=> {
+      this.reelService.deleteReel(this.route.snapshot.params["id"]).subscribe(() => {
+        this.alertify.success('Reel has been deleted');
+      }, error => {
+        this.alertify.error('Failed to deltete');
+      });
+    });
+  }
   updateReel() {
     this.reelService.updateReel(this.reel.id, this.reel).subscribe(next => {
       this.alertify.success('Pakeista sekmingai');

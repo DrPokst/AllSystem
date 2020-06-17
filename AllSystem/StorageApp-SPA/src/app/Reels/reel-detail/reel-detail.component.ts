@@ -22,6 +22,8 @@ export class ReelDetailComponent implements OnInit {
     
   }
 
+ 
+
   loadReel(){
     this.reelService.getReel(this.route.snapshot.params['id']).subscribe((reels: Reels) =>{
       this.reels = reels;

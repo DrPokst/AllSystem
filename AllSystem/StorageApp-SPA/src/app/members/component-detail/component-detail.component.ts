@@ -100,7 +100,7 @@ export class ComponentDetailComponent implements OnInit {
     window.print();
   }
 
-  deleteC(id: number){
+  deleteC(){
 
     this.alertify.confirm('Are you sure want to delete this photo?', ()=> {
       this.componentService.deleteComponent(this.route.snapshot.params["id"]).subscribe(() => {

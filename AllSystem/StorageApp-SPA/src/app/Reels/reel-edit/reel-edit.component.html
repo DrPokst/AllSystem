@@ -6,7 +6,7 @@
             <button [disabled]="!editForm.dirty" form="editForm" class="btn btn-sm btn-secondary w-150">Save
                 Changes</button>
             <button class="btn btn-sm btn-outline-secondary" [routerLink]="['/reels']">Back</button>
-            <button class="btn btn-sm btn-outline-secondary">Delete</button>
+            <button class="btn btn-sm btn-outline-secondary" [routerLink]="['/reels']" (click)="deleteR()">Delete</button>
         </div>
     </div>
 

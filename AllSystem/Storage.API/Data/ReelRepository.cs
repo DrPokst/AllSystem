@@ -57,6 +57,12 @@ namespace Storage.API.Data
             return d;
         }
 
+        public async Task<Photo2> GetPhoto(int Rid)
+        {
+            var photo = await _context.Photos2.FirstOrDefaultAsync(p => p.ReelId == Rid);
+            return photo;
+        }
+
         public async Task<Reel> GetReel(int id)
         {
            var reel = await _context.Reels.Include(p => p.Photos2).FirstOrDefaultAsync(u => u.Id == id);
@@ -113,5 +119,7 @@ namespace Storage.API.Data
         {
             return await _context.SaveChangesAsync() > 0;
         }
+
+       
     }
 }

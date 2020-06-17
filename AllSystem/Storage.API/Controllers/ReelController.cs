@@ -9,6 +9,9 @@ using Storage.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Storage.API.Helpers;
+using CloudinaryDotNet.Actions;
+using Microsoft.Extensions.Options;
+using CloudinaryDotNet;
 
 namespace Storage.API.Controllers
 {   
@@ -19,10 +22,22 @@ namespace Storage.API.Controllers
         
         private readonly IReelRepository _repo;
         private readonly IMapper _mapper;
-        public ReelController(IReelRepository repo, IMapper mapper)
+        private readonly IOptions<CloudinarySettings> _cloudinaryConfig;
+        private Cloudinary _cloudinary;
+
+        public ReelController(IReelRepository repo, IMapper mapper, IOptions<CloudinarySettings> cloudinaryConfig)
         {
             _mapper = mapper;
+            _cloudinaryConfig = cloudinaryConfig;
             _repo = repo;
+            Account acc = new Account(
+                _cloudinaryConfig.Value.CloudName = "drpokst1",           // reikia pakeisti del saugumo negali visi matyti.... 
+                _cloudinaryConfig.Value.ApiKey = "753448745425474",         // reikia pakeisti del saugumo negali visi matyti.... 
+                _cloudinaryConfig.Value.ApiSecret = "x8KHxQjnrGXKcu9WOfxU2ddkGqE"     // reikia pakeisti del saugumo negali visi matyti.... 
+
+            );
+
+            _cloudinary = new Cloudinary(acc);
         }
         
         [HttpGet]
@@ -72,6 +87,56 @@ namespace Storage.API.Controllers
                 return NoContent();
 
             throw new Exception($"Updating user {id} failed on save");
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteReel(int id)
+        {
+            var reelFromRepo = await _repo.GetReel(id);
+
+            var photoFromRepo = await _repo.GetPhoto(reelFromRepo.Id);
+
+           /*
+            if (photoFromRepo.PublicId != null)
+            {
+                var deleteParams = new DeletionParams(photoFromRepo.PublicId);
+
+                var result = _cloudinary.Destroy(deleteParams);
+
+                if (result.Result == "ok")
+                {
+                    _repo.Delete(photoFromRepo);
+                }
+                _repo.Delete(reelFromRepo);
+            }
+
+            if (photoFromRepo.PublicId == null)
+            {
+                _repo.Delete(photoFromRepo);
+                _repo.Delete(reelFromRepo);
+            }
+
+             */
+
+            if (photoFromRepo == null)
+            {
+                _repo.Delete(reelFromRepo);
+            }
+
+            if (photoFromRepo != null)
+            {
+                _repo.Delete(reelFromRepo);
+                _repo.Delete(photoFromRepo);
+            }
+
+            if (await _repo.SaveAll())
+            {
+                return Ok();
+            }
+
+
+            return BadRequest("Failed to delete");
+
         }
 
     }

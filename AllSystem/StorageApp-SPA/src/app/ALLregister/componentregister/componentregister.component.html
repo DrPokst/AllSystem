@@ -87,19 +87,30 @@
                                     placeholder="Enter Mouser URL Here.."
                                     class="form-control">
                         </div>
-                        Upload Photo
-                    <input  type="file"
-                            formControlName="file"
-                            id="file"
-                            class="form-control"
-                            (change)="onFileChange($event)"/>
+                      
                         <div class="mt-5">
                             <button [disabled]="!registerForm.valid" class="btn btn-sm btn-outline-secondary btn-block"
-                                type="submit"><i class="fa fa-check mr-2"></i>Register</button>
+                                type="submit" [routerLink]="['/register/component']"><i class="fa fa-check mr-2"></i>Register</button>
                         </div>
 
                     </div>
-
+                    <div class="col-sm-6  mt-1">
+                        <label>
+                            Upload Photo
+                        </label>
+                        
+                        <input  type="file"
+                            formControlName="file"
+                            id="file"
+                            class="form-control"
+                            (change)="onFileChange($event)"
+                            (change)="showPreview($event)"
+                        />
+                        <img [src]="imageURL" height="file" width="60%"> 
+                              
+                        
+                    </div>
+                    
 
 
 

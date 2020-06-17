@@ -64,4 +64,7 @@ ResetLocation(model: any){
 TurnOnLed(id){
   return this.http.get(this.baseUrl + 'led/' + id);
 }
+deleteReel(reelId: NumberConstructor){
+  return this.http.delete(this.baseUrl + 'reel/' + reelId);
+}
 }

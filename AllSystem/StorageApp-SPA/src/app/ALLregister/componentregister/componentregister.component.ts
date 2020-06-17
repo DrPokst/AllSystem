@@ -12,6 +12,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class ComponentregisterComponent implements OnInit {
   model: any = {};
+  public imagePath;
+  imageURL: string;
+  url: any;
   @Output() cancelRegister = new EventEmitter();
   registerForm: FormGroup;
   
@@ -50,7 +53,21 @@ export class ComponentregisterComponent implements OnInit {
       });
 
     }
+  }
 
+  showPreview(event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.registerForm.patchValue({
+      fileSource: file
+    });
+    this.registerForm.get('fileSource').updateValueAndValidity()
+
+    // File Preview
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imageURL = reader.result as string;
+    };
+    reader.readAsDataURL(file);
   }
 
   registercomponent(){
@@ -86,8 +103,10 @@ export class ComponentregisterComponent implements OnInit {
     }, error => {
       this.alertify.error(error);
     });
-    console.log(this.model);
+    
     console.log(formData);
+    this.registerForm.reset();
+    this.imageURL = null;
   }
 
 
