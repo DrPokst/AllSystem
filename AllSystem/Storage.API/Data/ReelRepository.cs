@@ -106,6 +106,13 @@ namespace Storage.API.Data
             
         }
 
+        public async Task<Photo2> RegisterPhoto(Photo2 photo)
+        {
+            await _context.Photos2.AddAsync(photo);
+            await _context.SaveChangesAsync();
+
+            return photo;
+        }
 
         public async Task<Reel> RegisterReel(Reel reel)
         {

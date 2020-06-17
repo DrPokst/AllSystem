@@ -15,8 +15,9 @@ namespace Storage.API.Data
          Task<Reel> GetReel(int id);
          Task<Reel> GetReelCMnf(string cMnf);
          Task<Reel[]> GetCompare(int id);
-        Task<Photo2> GetPhoto(int Rid);
-        Task<Reel> RegisterReel(Reel reel);
+         Task<Photo2> RegisterPhoto(Photo2 photo);
+         Task<Photo2> GetPhoto(int Rid);
+         Task<Reel> RegisterReel(Reel reel);
 
     }
 }

@@ -59,8 +59,28 @@ namespace Storage.API.Controllers
             return Ok(reelToReturn);
         }
         [HttpPost("registerreel")]
-        public async Task<IActionResult> RegisterReel(ReelForRegisterDto reelForRegisterDto)
+        public async Task<IActionResult> RegisterReel([FromForm]ReelForRegisterDto reelForRegisterDto)
         {
+            var file = reelForRegisterDto.file;
+
+            var uploadResult = new ImageUploadResult();
+
+            if (file.Length > 0)
+            {
+                using (var stream = file.OpenReadStream())
+                {
+                    var uploadParams = new ImageUploadParams()
+                    {
+                        File = new FileDescription(file.Name, stream),
+                        Transformation = new Transformation().Width(500).Height(300).Crop("fill").Gravity("face")
+                    };
+
+                    uploadResult = _cloudinary.Upload(uploadParams);
+                }
+            }
+
+            reelForRegisterDto.PublicId = uploadResult.PublicId;
+
             var ReelToCreate = new Reel
             {
                 CMnf = reelForRegisterDto.CMnf,
@@ -69,7 +89,17 @@ namespace Storage.API.Controllers
 
             var CreateReel = await _repo.RegisterReel(ReelToCreate);
 
-            
+            var PhotoToCreate = new Photo2
+            {
+                PublicId = reelForRegisterDto.PublicId,
+                IsMain = true,
+                Url = uploadResult.Uri.ToString(),
+                ReelId = ReelToCreate.Id
+
+            };
+
+
+            var createPhoto = await _repo.RegisterPhoto(PhotoToCreate);
 
             return StatusCode(201);
         }

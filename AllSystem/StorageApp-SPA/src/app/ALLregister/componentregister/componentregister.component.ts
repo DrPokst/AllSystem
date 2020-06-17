@@ -36,7 +36,7 @@ export class ComponentregisterComponent implements OnInit {
         file: new FormControl('', [Validators.required]),
         fileSource: new FormControl('', [Validators.required])
       }
-    )
+    );
   }
   onFileChange(event) {
 
@@ -70,15 +70,6 @@ export class ComponentregisterComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-  registercomponent(){
-    /*this.componentService.registerComponent(this.model).subscribe(()=>{
-      this.alertify.success('sekmingai uzregistruota');
-    }, error => {
-      this.alertify.error(error);
-    });
-    console.log(this.model);*/
-    console.log(this.registerForm.value);
-  }
   submit(){
 
     const formData = new FormData();

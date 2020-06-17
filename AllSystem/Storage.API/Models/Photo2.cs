@@ -9,6 +9,7 @@ namespace Storage.API.Models
         public string Description { get; set; }
         public DateTime DateAdded { get; set; }
         public bool IsMain { get; set; }
+        public string PublicId { get; set; }
         public Reel Reel { get; set; } 
         public int ReelId { get; set; }
     }
