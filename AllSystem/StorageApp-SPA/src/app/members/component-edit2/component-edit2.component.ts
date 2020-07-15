@@ -22,7 +22,7 @@ export class ComponentEdit2Component implements OnInit {
 
   unloadNotification($event: any) {
     if (this.editForm.dirty) {
-      $event.returnValue = true;
+      $event.returnValue = false;
     }
   }
 
@@ -32,8 +32,6 @@ export class ComponentEdit2Component implements OnInit {
   ngOnInit(): void {
     this.route.data.subscribe(data => {
       this.components = data['components'];
-
-      
     });
 
 
@@ -45,6 +43,6 @@ export class ComponentEdit2Component implements OnInit {
     }, error => {
       this.alertify.error(error);
     });
-    
+
   }
 }

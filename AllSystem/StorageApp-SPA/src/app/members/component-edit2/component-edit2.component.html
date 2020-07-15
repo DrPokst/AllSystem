@@ -5,7 +5,7 @@
     <h1 class="">{{components.mnf}}</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
       <div class="btn-group mr-2">
-        <button [disabled]="!editForm.dirty" form="editForm" class="btn btn-sm btn-secondary w-150">Save
+        <button [disabled]="!editForm.dirty" form="editForm" class="btn btn-sm btn-secondary w-150" >Save
           Changes</button>
         <button class="btn btn-sm btn-outline-secondary" [routerLink]="['/members/', components.id]">Back</button>
         <button class="btn btn-sm btn-outline-secondary">Delete</button>
@@ -24,6 +24,14 @@
       </div>
 
       <form #editForm="ngForm" id="editForm" (ngSubmit)="updateComponents()">
+        <div class="row">
+          <div class="col-md-6">
+            <label>Buh. no</label>
+          </div>
+          <div class="col-md-6">
+            <input class="form-control input-sm" name="BuhNr" id="" cols="5" rows="1" [(ngModel)]="components.buhNr">
+          </div>
+        </div>
         <div class="row">
           <div class="col-md-6">
             <label>Manufacturer number</label>

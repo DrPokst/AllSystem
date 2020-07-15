@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ReelService } from 'src/app/_services/reel.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { ComponentService } from 'src/app/_services/component.service';
+import { Components } from 'src/app/_models/components';
 
 @Component({
   selector: 'app-reelregister',
@@ -14,10 +17,12 @@ export class ReelregisterComponent implements OnInit {
   imageURL: string;
   url: any;
   registerForm: FormGroup;
-  
-  constructor(private reelService: ReelService, private  alertify: AlertifyService) { }
+  components: Components[];
+
+  constructor(private componentService: ComponentService, private reelService: ReelService, private  alertify: AlertifyService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.loadMnfs();
     this.registerForm = new FormGroup(
       {
         CMnf: new FormControl(),
@@ -26,8 +31,18 @@ export class ReelregisterComponent implements OnInit {
         fileSource: new FormControl('', [Validators.required])
       }
     );
+      
   }
 
+
+  loadMnfs(){
+    this.componentService.getMnfs().subscribe((components: Components[]) => {
+      this.components = components;
+      console.log(this.components);
+    }), error => {
+      this.alertify.error(error);
+    }
+  }
   onFileChange(event) {
 
     if (event.target.files.length > 0) {
@@ -55,7 +70,7 @@ export class ReelregisterComponent implements OnInit {
     };
     reader.readAsDataURL(file);
   }
-
+  
   submit(){
 
     const formData = new FormData();
@@ -77,7 +92,5 @@ export class ReelregisterComponent implements OnInit {
     this.registerForm.reset();
     this.imageURL = null;
   }
-
-  
 
 }

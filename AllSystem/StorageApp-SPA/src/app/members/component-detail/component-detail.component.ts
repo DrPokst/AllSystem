@@ -3,6 +3,7 @@ import { ComponentService } from "src/app/_services/component.service";
 import { AlertifyService } from "src/app/_services/alertify.service";
 import { ActivatedRoute } from "@angular/router";
 import { Components } from "src/app/_models/components";
+import { compOData } from "src/app/_models/compOData";
 import {
   NgxGalleryOptions,
   NgxGalleryImage,
@@ -13,6 +14,7 @@ import { Subscriber } from "rxjs";
 import { Reels } from "src/app/_models/Reels";
 import { ReelsListComponent } from "src/app/Reels/reels-list/reels-list.component";
 import { Photo } from "src/app/_models/photo";
+import { OdataService } from 'src/app/_services/odata.service';
 
 @Component({
   selector: "app-component-detail",
@@ -21,6 +23,7 @@ import { Photo } from "src/app/_models/photo";
 })
 export class ComponentDetailComponent implements OnInit {
   components: Components;
+  compodata: compOData;
   photos: Photo[];
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
@@ -31,7 +34,8 @@ export class ComponentDetailComponent implements OnInit {
     private componentService: ComponentService,
     private alertify: AlertifyService,
     private route: ActivatedRoute,
-    private compareService: CompareService
+    private compareService: CompareService,
+    private odataService: OdataService
   ) {}
 
   ngOnInit() {
@@ -80,7 +84,16 @@ export class ComponentDetailComponent implements OnInit {
       );
   }
 
-
+  getOData(){
+    this.odataService.GetOData(this.components.buhNr).subscribe(
+      (compodata: compOData) => {
+        this.compodata = compodata;
+      },
+      (error) => {
+        this.alertify.error(error);
+      }
+    );
+  }
 
   getImages() {
     const imageUrls = [];

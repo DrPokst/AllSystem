@@ -15,6 +15,9 @@ export class ComponentService {
 
 constructor(private http: HttpClient) { }
 
+getMnfs(): Observable<Components[]>{
+  return this.http.get<Components[]>(this.baseUrl + 'search/all');
+}
 getComponents(page?, itempsPerPage?, componentParams?): Observable<PaginatedResult<Components[]>>{
   const paginatedResult: PaginatedResult<Components[]> = new PaginatedResult<Components[]>();
   let params = new HttpParams();

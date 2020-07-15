@@ -100,6 +100,8 @@ export class ComponentregisterComponent implements OnInit {
     this.imageURL = null;
   }
 
+  clear(){
+  }
 
   cancel(){
     this.cancelRegister.emit(false);

@@ -15,7 +15,7 @@ namespace Storage.API.Data
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Photo2> Photos2 { get; set; }
         public DbSet<Reel> Reels { get; set; }
-
+        public DbSet<History> History { get; set; }
 
         internal object ToList()
         {

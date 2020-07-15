@@ -8,3 +8,13 @@
 .qr{
     height: 120px;
 }
+.lipdukas{
+    height: 25mm;
+    width: 50mm;
+    color: white;
+}
+@media print {
+	div {
+		font-size: 5 pt;
+	}
+}

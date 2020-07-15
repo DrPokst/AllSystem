@@ -28,11 +28,18 @@ namespace Storage.API.Data
 
         public async Task<Componentas> GetComponents(int id)
         {
-            var componentass = await _context.Componentass.Include(p => p.Photos).FirstOrDefaultAsync(u => u.Id == id);
+            var componentass = await _context.Componentass.Include(p => p.Photos)
+                                                          .Include(h => h.History)
+                                                          .FirstOrDefaultAsync(u => u.Id == id);
 
             return componentass;
         }
+        public async Task<IEnumerable<Componentas>> GetMnfs()
+        {
+            var componentass = _context.Componentass.AsQueryable();
 
+            return componentass;
+        }
         public async Task<PageList<Componentas>> GetComponents(ComponentParams componentParams)
         {
             var componentass = _context.Componentass.Include(p => p.Photos).AsQueryable();
@@ -125,6 +132,21 @@ namespace Storage.API.Data
         {
             var photo = await _context.Photos.FirstOrDefaultAsync(p => p.ComponentasId == Cid);
             return photo;
+        }
+
+        public async Task<History> RegisterHistory(History history)
+        {
+            await _context.History.AddAsync(history);
+            await _context.SaveChangesAsync();
+
+            return history;
+        }
+
+        public async Task<IEnumerable<History>> GetHistory()
+        {
+            var history = _context.History.AsQueryable();
+
+            return history;
         }
     }
 }

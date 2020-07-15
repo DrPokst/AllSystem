@@ -4,50 +4,78 @@
         <img src="{{reel.photoUrl2}}" alt="" />
     </div>
 
-    <div class="pb-2 mb-3 border-bottom">
-        <div class="row">
-            <div class="col-sm-5 border-right">
-                Reel ID:
+
+
+    <div class="printas">
+        <div class="pb-2 mb-3 border-bottom">
+            <div class="row">
+                <div class="col-sm-5 border-right">
+                    Reel ID:
+                </div>
+                <div class="col-sm-7">
+                    {{reel.id}}
+                </div>
             </div>
-            <div class="col-sm-7">
-                {{reel.id}}
+        </div>
+        <div class="pb-2 mb-3 border-bottom">
+            <div class="row">
+                <div class="col-sm-5 border-right">
+                   Mnf:
+                </div>
+                <div class="col-sm-7">
+                    {{reel.cMnf}}
+                </div>
+            </div>
+        </div>
+
+        <div class="pb-2 mb-3 border-bottom">
+            <div class="row">
+                <div class="col-sm-5 border-right sss">
+                    QTY:
+                </div>
+                <div class="col-sm-7">
+                    {{reel.qty}}
+                </div>
+            </div>
+        </div>
+
+        <div class="pb-2 mb-3 border-bottom">
+            <div class="row">
+                <div class="col-sm-5 border-right">
+                   Location:
+                </div>
+                <div class="col-sm-7 qr">
+                    {{reel.location}}
+                    <qrcode [qrdata]=reel.location [width]="20" [errorCorrectionLevel]="'M'" [elementType]="'svg'"></qrcode>
+                    
+                </div>
             </div>
         </div>
     </div>
-    
 
-    <div class="pb-2 mb-3 border-bottom">
-    <div class="row">
-        <div class="col-sm-5 border-right">
-            Mnf:
-        </div>
-        <div class="col-sm-7">
-            {{reel.cMnf}}
-        </div>
-    </div>
-    </div>
-
-    <div class="pb-2 mb-3 border-bottom">
-    <div class="row">
-        <div class="col-sm-5 border-right">
-            QTY:
-        </div>
-        <div class="col-sm-7">
-            {{reel.qty}}
-        </div>
-    </div>
-    </div>
-
-    <div class="pb-2 mb-3 border-bottom">
-    <div class="row">
-        <div class="col-sm-5 border-right">
-            Location:
-        </div>
-        <div class="col-sm-7 qr">
-            {{reel.location}}
-            <qrcode qrdata="{{reel.location}}" [width]="20" [errorCorrectionLevel]="'M'"></qrcode>
-        </div>
-    </div>
-    </div>
 
 </div>
+
+<div id="print-section">
+ <div class="lipdukas">
+     <div class="row">
+        <div class="col-sm-6">
+            {{reel.cMnf}}
+            ID: {{reel.id}} 
+                   
+                
+        </div>
+        <div class="col-sm-6">
+            {{reel.location}}<qrcode [qrdata]=reel.location [width]="60" [errorCorrectionLevel]="'M'" [elementType]="'svg'"></qrcode>
+        </div>
+     </div>
+    
+    
+    
+ </div>
+    
+</div>
+
+
+
+<button   printSectionId="print-section" ngxPrint>print</button>

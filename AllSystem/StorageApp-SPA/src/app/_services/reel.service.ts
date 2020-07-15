@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Reels } from '../_models/Reels';
 import { PaginatedResult } from '../_models/pagination';
 import { map } from 'rxjs/operators';
+import { history } from '../_models/history';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +45,10 @@ getReels(page?, itempsPerPage?, componentParams?): Observable<PaginatedResult<Re
         return paginatedResult;
       })
     )
+}
+
+getHistory(): Observable<history[]>{
+  return this.http.get<history[]>(this.baseUrl + 'location/history');
 }
 
 getReel(id): Observable<Reels>{

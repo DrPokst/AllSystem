@@ -26,7 +26,21 @@ namespace Storage.API.Controllers
         public async Task<IActionResult> RegisterLocation(LocationForRegisterDto LocationForRegisterDto)
         {
 
-            var ReelsFromRepo = await _repo.GetReel(LocationForRegisterDto.Id);
+           var ReelsFromRepo = await _repo.GetReel(LocationForRegisterDto.Id);
+
+           if (LocationForRegisterDto.QTY == 0) LocationForRegisterDto.QTY = ReelsFromRepo.QTY;
+           
+           var HistoryToCreate = new History
+            {
+                Mnf = ReelsFromRepo.CMnf,
+                NewLocation = LocationForRegisterDto.Location,
+                NewQty = LocationForRegisterDto.QTY,
+                OldLocation = ReelsFromRepo.Location,
+                OldQty = ReelsFromRepo.QTY,
+                DateAdded = DateTime.Now
+           };
+
+            var createHistory = await _srepo.RegisterHistory(HistoryToCreate);
 
             _mapper.Map(LocationForRegisterDto, ReelsFromRepo);
 
@@ -37,6 +51,13 @@ namespace Storage.API.Controllers
              return BadRequest("Could notregister location");
         }
 
-        
+        [HttpGet("history")]
+        public async Task<IActionResult> GetHistory()
+        {
+            var history = await _srepo.GetHistory();
+            //var componentsToReturn = _mapper.Map<IEnumerable<ComponetsForListDto>>(components);
+
+            return Ok(history);
+        }
     }
 }
